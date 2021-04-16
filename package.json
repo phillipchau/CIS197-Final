@@ -21,6 +21,12 @@
     "url": "https://github.com/phillipchau/CIS197-Final/issues"
   },
   "homepage": "https://github.com/phillipchau/CIS197-Final#readme",
+  "devDependencies": {
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jsx-a11y": "^6.3.0",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4 || ^3 || ^2.3.0 || ^1.7.0"
+  },
   "dependencies": {
     "axios": "^0.21.1",
     "concurrently": "^6.0.2",
@@ -31,6 +37,16 @@
     "parcel-bundler": "^1.12.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^5.2.0"
-  }
+    "react-router-dom": "^5.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "babel-eslint": "^10.1.0"
+  },
+  "browserslist": [
+    "last 3 and_chr versions",
+    "last 3 chrome versions",
+    "last 3 opera versions",
+    "last 3 ios_saf versions",
+    "last 3 safari versions"
+  ]
 }

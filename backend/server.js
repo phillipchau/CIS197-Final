@@ -27,9 +27,9 @@ app.use(cookieSession({
 app.use(express.static('dist'))
 app.use(express.json())
 
-app.use(errorHandle)
 app.use('/api', InfoRouter)
 app.use('/account', AccountRouter)
+app.use(errorHandle)
 
 // INTEGRATION
 app.get('/favicon.ico', (req, res) => {

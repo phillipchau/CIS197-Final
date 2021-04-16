@@ -1,15 +1,14 @@
 const express = require('express')
-
 const User = require('../models/user')
+const isAuthenticated = require('../middleware/isAuthenticated')
 
 const router = express.Router()
 
-router.post('/signup', (req, res) => {
+router.post('/signup', (req, res, next) => {
     const { username, password, first_name, last_name, description } = req.body
     User.create({ username, password, first_name, last_name, description }, (err, data) => {
         if (err) {
-            console.log(err)
-            console.log('need to handle error')
+            next(new Error('Failed to signup'))
         } else {
             req.session.username = username
             req.session.password = password
@@ -18,11 +17,11 @@ router.post('/signup', (req, res) => {
     })
 })
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
     const { username, password } = req.body
     User.findOne({ username, password }, (err, user) => {
         if (err) {
-            console.log('handle error')
+            next(new Error('Failed to login'))
         } else if (user){
             req.session.username = username
             req.session.password = password
@@ -33,7 +32,7 @@ router.post('/login', (req, res) => {
     })
 })
 
-router.post('/logout', (req, res) => {
+router.post('/logout', isAuthenticated, (req, res) => {
     req.session.username = ''
     req.session.password = ''
     res.send('user logged out')

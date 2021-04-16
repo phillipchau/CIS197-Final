@@ -3,9 +3,26 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
 } from 'react-router-dom'
+import Login from './Login'
+import Home from './Home'
+import Signup from './Signup'
+import '../App.css'
 const App = () => (
-  <h1>Your react app!</h1>
+  <>
+  <Router>
+    <Switch>
+      <Route exact path = "/">
+        <Home />
+      </Route>
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path='/signup'>
+        <Signup />
+      </Route>
+    </Switch>
+  </Router>
+  </>
 )
 export default App
