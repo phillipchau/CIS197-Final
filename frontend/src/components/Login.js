@@ -7,14 +7,29 @@ const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const history = useHistory()
+
+  const getLog = async () => {
+    const logdata = await axios.get('/account/logstatus')
+    if (typeof logdata.data === 'string' && logdata.data.startsWith('ERROR:')) {
+      alert('ERROR with getting login data')
+    } else if (logdata.data) {
+      // if the user is logged in we redirect them to their page
+      history.push(`/home/${logdata.data.user}`)
+    }
+  }
+
   const signin = async () => {
     const data = await axios.post('/account/login', { username, password })
     if (typeof data.data === 'string' && data.data.startsWith('ERROR:')) {
       alert('An error occured while logging in')
     } else {
-      history.push('/')
+      history.push(`/home/${username}`)
     }
   }
+
+  useEffect(() => {
+    getLog()
+  }, [])
   return (
     <>
       <div id="loginbody" className="bg-light">

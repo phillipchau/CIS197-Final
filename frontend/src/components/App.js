@@ -3,26 +3,31 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  useParams,
 } from 'react-router-dom'
 import Login from './Login'
 import Home from './Home'
 import Signup from './Signup'
-import '../App.css'
+import Feed from './Feed'
+
 const App = () => (
   <>
-  <Router>
-    <Switch>
-      <Route exact path = "/">
-        <Home />
-      </Route>
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path='/signup'>
-        <Signup />
-      </Route>
-    </Switch>
-  </Router>
+    <Router>
+      <Switch>
+        <Route path="/home/:id">
+          <Home />
+        </Route>
+        <Route path="/">
+          <Login />
+        </Route>
+        <Route path="/signup">
+          <Signup />
+        </Route>
+        <Route path="/feed">
+          <Feed />
+        </Route>
+      </Switch>
+    </Router>
   </>
 )
 export default App

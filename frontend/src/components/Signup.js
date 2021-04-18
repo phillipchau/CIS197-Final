@@ -18,7 +18,7 @@ const Signup = () => {
     if (typeof data.data === 'string' && data.data.startsWith('ERROR:')) {
       alert('An error occured while signing up')
     } else {
-      history.push('/')
+      history.push(`/${username}`)
     }
   }
   return (
@@ -66,7 +66,7 @@ const Signup = () => {
                     <div className="form-group">
                       <p className="signup-margin text-secondary">
                         Already have an account?
-                        <Link to="/login"> Return to login page</Link>
+                        <Link to="/"> Return to login page</Link>
                       </p>
                       <button className="btn btn-primary float-right" type="submit">Submit</button>
                     </div>
