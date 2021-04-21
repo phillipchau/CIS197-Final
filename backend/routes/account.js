@@ -8,7 +8,7 @@ router.get('/users/:username', isAuthenticated, (req, res, next) => {
   const { username } = req.params
   User.findOne({ username }, (err, user) => {
     if (err) {
-      next(new Error('Failed to login'))
+      next(new Error('Failed to user'))
     } else if (user) {
       res.send(user)
     } else {
@@ -16,6 +16,19 @@ router.get('/users/:username', isAuthenticated, (req, res, next) => {
     }
   })
 })
+
+router.get('/allusers', isAuthenticated, (req, res, next) => {
+  User.find({}, (err, user) => {
+    if (err) {
+      next(new Error('Failed to get user'))
+    } else if (user) {
+      res.send(user)
+    } else {
+      console.log('no user found')
+    }
+  })
+})
+
 router.post('/signup', (req, res, next) => {
   const {
     username, password, first_name, last_name, description,

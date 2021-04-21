@@ -8,9 +8,12 @@ const CommentWrapper = ({ commentid, first_name, last_name, content }) => {
   return (
     <>
       <div className="postcontent">
-        <div className="headerpost">
+        <span>
+          <img id="smallprofpost" src="https://sumaleeboxinggym.com/wp-content/uploads/2018/06/Generic-Profile-1600x1600.png" alt="profile" />
+        </span>
+        <span className="headerpost">
           {first_name} {last_name}
-        </div>
+        </span>
         <div className="posttext">
           {content}
         </div>

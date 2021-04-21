@@ -14,11 +14,11 @@ const App = () => (
   <>
     <Router>
       <Switch>
+        <Route exact path="/">
+          <Login />
+        </Route>
         <Route path="/home/:id">
           <Home />
-        </Route>
-        <Route path="/">
-          <Login />
         </Route>
         <Route path="/signup">
           <Signup />

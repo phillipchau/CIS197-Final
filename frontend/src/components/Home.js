@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useHistory, useParams } from 'react-router-dom'
+import TextField from '@material-ui/core/TextField'
+import Autocomplete from '@material-ui/lab/Autocomplete'
 import '../App.css'
 import Information from './Information'
 import ResponseModal from './Modal'
@@ -11,10 +13,12 @@ const Home = () => {
   const [education, setEducation] = useState([])
   const [experience, setExperience] = useState([])
   const [user, setUser] = useState([])
+  const [users, setUsers] = useState([])
+  const [search, setSearch] = useState()
 
   const { id } = useParams()
 
-  //state to track updates
+  // state to track updates
   const [update, setUpdate] = useState(true)
 
   const [modaleducation, setModalEducation] = useState(false)
@@ -48,6 +52,17 @@ const Home = () => {
       setUser(data.data)
     }
   }
+
+  const getAllUsers = async () => {
+    const data = await axios.get('/account/allusers')
+    if (typeof data.data === 'string' && data.data.startsWith('ERROR:')) {
+      alert('ERROR with getting data')
+    } else {
+      console.log(data.data)
+      setUsers(data.data)
+    }
+  }
+
   const getEducation = async () => {
     const data = await axios.get(`/api/education/${id}`)
     if (typeof data.data === 'string' && data.data.startsWith('ERROR: ')) {
@@ -78,11 +93,32 @@ const Home = () => {
 
   return (
     <>
-      <div className="navbar">
-        <h3>{user.first_name} {user.last_name}</h3>
-        <button onClick={() => history.push('/')} style={{ marginBottom: 5, marginRight: 5, fontSize: '25px' }} type="button" className="btn btn-light">Home</button>
-        <button onClick={() => history.push('/feed')} style={{ marginBottom: 5, marginRight: 5, fontSize: '25px' }} type="button" className="btn btn-light">Feed</button>
-        <button style={{ marginBottom: 5, marginRight: 20, display: 'inline' }} type="button" onClick={logout} className="btn btn-success">Log Out</button>
+      <div className="topbar" style={{ padding: 20 }}>
+        <span>
+          <img
+            style={{
+              width: 75, height: 75, objectFit: 'cover', marginRight: 10
+            }}
+            src="https://branding.web-resources.upenn.edu/sites/default/files/simplified-shield-final%20%285%29.png"
+            alt="logo"
+          />
+        </span>
+        <span style={{ marginTop: 20 }}>
+          <Autocomplete
+            id="combo-box-demo"
+            options={users}
+            getOptionLabel={option => `${option.first_name} ${option.last_name}`}
+            style={{ width: 300, display: 'inline-block', verticalAlign: 'middle', color: 'grey', backgroundColor: 'white' }}
+            onChange={e => setSearch(e.target.value)}
+            renderInput={params => <TextField {...params} label="Find Friends" variant="outlined" />}
+          />
+          <button style={{ display: 'inline-block', verticalAlign: 'middle', height: 57, marginLeft: 5 }} type="button" className="btn btn-outline-light">Submit</button>
+        </span>
+        <span style={{ float: 'right' }}>
+          <button onClick={() => history.push(`/home/${login}`)} style={{ marginBottom: 5, marginRight: 5, fontSize: '30px' }} type="button" className="btn btn-primary">Home</button>
+          <button onClick={() => history.push('/feed')} style={{ marginBottom: 5, marginRight: 30, fontSize: '30px' }} type="button" className="btn btn-primary">Feed</button>
+          <button style={{ marginBottom: 5, marginRight: 20, display: 'inline' }} type="button" onClick={logout} className="btn btn-success">Log Out</button>
+        </span>
       </div>
       <div className="mainbody">
         <div className="profileContainer">

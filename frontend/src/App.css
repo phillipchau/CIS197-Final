@@ -131,18 +131,34 @@ body {padding-bottom: 20px;}
   border-radius: 50%;
   border: 1px solid gray;
   overflow: hidden;
+  display:'inline-block'
 }
 
 #smallprof{
-  width:100%;
+  width: 75px;
+  height: 75px;
+  object-fit: 'cover';
+  margin-right: 10px;
+  border-radius: 50%;
+  border:1px solid black;
+}
+
+
+#smallprofpost{
+  width: 65px;
+  height: 65px;
+  object-fit: 'cover';
+  margin-right: 10px;
+  border-radius: 50%;
+  border:1px solid black;
 }
 
 .profilePicture{
   width: 100%;
 }
 
-.navbar{
-  background-color:#f8f9fa;
+.topbar{
+  background-color:#007bff;
   border-bottom: 2px solid black;
 }
 
@@ -182,13 +198,10 @@ body {padding-bottom: 20px;}
 
 .posttext{
   font-size:20px;
+  text-align:center;
 }
 
 .commentgroup{
   margin-top:10px;
   border-top: 1px solid gray;
-}
-
-#commentbutton{
-  left:50%;
 }

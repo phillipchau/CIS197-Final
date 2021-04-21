@@ -66,13 +66,16 @@ const PostWrapper = ({ postid, userInfo, firstname, lastname, contentInfo }) => 
   return (
     <>
       <div className="postcontent">
-        <div className="headerpost">
+        <span>
+          <img id="smallprofpost" src="https://sumaleeboxinggym.com/wp-content/uploads/2018/06/Generic-Profile-1600x1600.png" alt="profile" />
+        </span>
+        <span className="headerpost">
           {firstname} {lastname}
-        </div>
+        </span>
         <div className="posttext">
           {contentInfo}
         </div>
-        <button onClick={() => setCommentOn(!commentOn)} id="commentbutton" type="button" className="btn btn-outline-primary">
+        <button onClick={() => setCommentOn(!commentOn)} type="button" className="commentButton btn btn-outline-primary">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chat-left" viewBox="0 0 16 16" style={{ marginRight: 10 }}>
             <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
           </svg>
