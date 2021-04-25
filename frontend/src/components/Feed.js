@@ -66,6 +66,11 @@ const Feed = () => {
     }
   }
 
+  const searchSubmit = async () => {
+    console.log(search)
+    history.push(`/home/${search.username}`)
+  }
+
   useEffect(() => {
     getLog()
   }, [])
@@ -87,7 +92,7 @@ const Feed = () => {
             style={{
               width: 75, height: 75, objectFit: 'cover', marginRight: 10,
             }}
-            src="https://branding.web-resources.upenn.edu/sites/default/files/simplified-shield-final%20%285%29.png"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UPenn_shield_with_banner.svg/1200px-UPenn_shield_with_banner.svg.png"
             alt="logo"
           />
         </span>
@@ -95,11 +100,12 @@ const Feed = () => {
           <Autocomplete
             id="combo-box-demo"
             options={users}
+            onChange={(event, value) => setSearch(value)}
+            getOptionSelected={(option, value) => `${option.first_name} ${option.last_name}` === `${value.first_name} ${value.last_name}`}
             getOptionLabel={option => `${option.first_name} ${option.last_name}`}
             style={{
               width: 300, display: 'inline-block', verticalAlign: 'middle', color: 'grey', backgroundColor: 'white',
             }}
-            onChange={e => setSearch(e.target.value)}
             renderInput={params => <TextField {...params} label="Find Friends" variant="outlined" />}
           />
           <button
@@ -108,6 +114,7 @@ const Feed = () => {
             }}
             type="button"
             className="btn btn-outline-light"
+            onClick={searchSubmit}
           >
             Submit
           </button>
@@ -121,20 +128,23 @@ const Feed = () => {
       <div id="postwrap">
         <div id="postcontainer">
           <span style={{ display: 'inline-block', position: 'relative', bottom: 70 }}>
-            <img id="smallprof" src="https://sumaleeboxinggym.com/wp-content/uploads/2018/06/Generic-Profile-1600x1600.png" alt="unplash" />
+            <div className="smallprofcontainer">
+              <img className="smallprof" src={user.profile} alt="profile" />
+            </div>
           </span>
           <span style={{ display: 'inline-block', width: '80%' }}>
-            <PostForm id="postform" username={user.username} first_name={user.first_name} last_name={user.last_name} />
+            <PostForm id="postform" username={user.username} first_name={user.first_name} last_name={user.last_name} profile={user.profile} />
           </span>
         </div>
         {post.map(info => (
           <PostWrapper
             key={info._id}
             postid={info._id}
-            userInfo={info.username}
+            prof={info.profile}
             firstname={info.first_name}
             lastname={info.last_name}
             contentInfo={info.content}
+            login={login}
           />
         ))}
       </div>

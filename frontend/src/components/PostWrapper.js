@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import '../App.css'
-import CommentWrapper from './CommentWrapper'
 import axios from 'axios'
+import CommentWrapper from './CommentWrapper'
 
-const PostWrapper = ({ postid, userInfo, firstname, lastname, contentInfo }) => {
+const PostWrapper = ({ postid, firstname, lastname, contentInfo, prof, login }) => {
   const [comment, setComment] = useState('')
   // checks to see if the comment is toggled
   const [commentOn, setCommentOn] = useState(false)
@@ -23,20 +23,24 @@ const PostWrapper = ({ postid, userInfo, firstname, lastname, contentInfo }) => 
     setButton(false)
   }
 
-  const getUser = async () => {
-    const data = await axios.get('/account/users')
+  const getUser = async person => {
+    const data = await axios.get(`/account/users/${person}`)
     if (typeof data.data === 'string' && data.data.startsWith('ERROR: ')) {
       alert('ERROR with getting education data')
     } else {
+      console.log(data.data)
       setUser(data.data)
     }
   }
 
   const submitComment = async () => {
     const content = comment
-    const { username, first_name, last_name } = user
+    const {
+      username, first_name, last_name, profile,
+    } = user
+    console.log(user)
     const data = await axios.post('/feed/comments/add', {
-      postid, username, first_name, last_name, content,
+      postid, username, first_name, last_name, content, profile,
     })
     if (typeof data.data === 'string' && data.data.startsWith('ERROR:')) {
       alert('ERROR while filling in response. Please try again')
@@ -60,14 +64,16 @@ const PostWrapper = ({ postid, userInfo, firstname, lastname, contentInfo }) => 
   }, [commentOn, commentsubmit])
 
   useEffect(() => {
-    getUser()
+    getUser(login)
   }, [])
 
   return (
     <>
       <div className="postcontent">
         <span>
-          <img id="smallprofpost" src="https://sumaleeboxinggym.com/wp-content/uploads/2018/06/Generic-Profile-1600x1600.png" alt="profile" />
+          <div className="postimagecontainer">
+            <img className="smallprof" src={prof} alt="profile" />
+          </div>
         </span>
         <span className="headerpost">
           {firstname} {lastname}
@@ -96,6 +102,7 @@ const PostWrapper = ({ postid, userInfo, firstname, lastname, contentInfo }) => 
                 first_name={info.first_name}
                 last_name={info.last_name}
                 content={info.content}
+                prof={info.profile}
               />
             ))}
           </>

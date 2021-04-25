@@ -6,6 +6,8 @@ const userSchema = new Schema({
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   description: { type: String, required: true },
+  friends: [String],
+  profile: { type: String, required: true },
 })
 
 module.exports = model('User', userSchema)

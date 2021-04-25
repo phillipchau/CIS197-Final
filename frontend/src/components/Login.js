@@ -12,8 +12,8 @@ const Login = () => {
     const logdata = await axios.get('/account/logstatus')
     if (typeof logdata.data === 'string' && logdata.data.startsWith('ERROR:')) {
       alert('ERROR with getting login data')
-    } else if (logdata.data.user !== '') {
-      console.log(logdata.data)
+    } else if (logdata.data.user) {
+      console.log(logdata.data.user)
       // if the user is logged in we redirect them to their page
       history.push(`/home/${logdata.data.user}`)
     }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../App.css'
 
-const CommentWrapper = ({ commentid, first_name, last_name, content }) => {
+const CommentWrapper = ({ commentid, first_name, last_name, content, prof }) => {
   const [comment, setComment] = useState('')
   const [commentOn, setCommentOn] = useState(false)
 
@@ -9,7 +9,9 @@ const CommentWrapper = ({ commentid, first_name, last_name, content }) => {
     <>
       <div className="postcontent">
         <span>
-          <img id="smallprofpost" src="https://sumaleeboxinggym.com/wp-content/uploads/2018/06/Generic-Profile-1600x1600.png" alt="profile" />
+          <div className="postimagecontainer">
+            <img className="smallprof" src={prof} alt="profile" />
+          </div>
         </span>
         <span className="headerpost">
           {first_name} {last_name}

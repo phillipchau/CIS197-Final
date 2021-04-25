@@ -1,9 +1,54 @@
 const express = require('express')
+const AWS = require('aws-sdk')
 const isAuthenticated = require('../middleware/isAuthenticated')
 const Education = require('../models/education')
 const Experience = require('../models/experience')
+const Skill = require('../models/skills')
 
 const router = express.Router()
+
+// router for skills
+router.post('/skills/add', isAuthenticated, (req, res, next) => {
+  const { username } = req.session
+  console.log(username)
+  const {
+    skill, type,
+  } = req.body
+  Skill.create({
+    username, skill, type,
+  }, (err, data) => {
+    if (err) {
+      console.log(err)
+      next(new Error('Data cant be added'))
+    } else {
+      res.send('skill added successfully')
+    }
+  })
+})
+
+router.get('/skills/:username', isAuthenticated, (req, res, next) => {
+  const { username } = req.params
+  const { type } = req.query
+  Skill.find({ username, type }, (err, data) => {
+    if (err) {
+      next(new Error('Data not found'))
+    } else {
+      res.send(data)
+    }
+  })
+})
+
+router.post('/skills/delete/:skill', isAuthenticated, (req, res, next) => {
+  const { username } = req.session
+  const { skill } = req.params
+  Skill.deleteOne({ username, skill }, (err, data) => {
+    if (err) {
+      next(new Error('Failed to remove'))
+    } else {
+      res.send(data)
+    }
+  })
+})
 
 router.get('/education/:username', isAuthenticated, (req, res, next) => {
   const { username } = req.params

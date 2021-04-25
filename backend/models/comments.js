@@ -6,6 +6,7 @@ const commentSchema = new Schema({
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   content: { type: String, required: true },
+  profile: { type: String, required: true },
 })
 
 module.exports = model('Comments', commentSchema)

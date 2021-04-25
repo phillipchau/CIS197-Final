@@ -6,6 +6,7 @@ const path = require('path')
 const AccountRouter = require('./routes/account')
 const InfoRouter = require('./routes/api')
 const FeedRouter = require('./routes/feed')
+const ImageRouter = require('./routes/image')
 
 const app = express()
 const MONGO_URI = 'mongodb://localhost:27017/Final'
@@ -31,6 +32,7 @@ app.use(express.json())
 app.use('/api', InfoRouter)
 app.use('/account', AccountRouter)
 app.use('/feed', FeedRouter)
+app.use('/image', ImageRouter)
 app.use(errorHandle)
 
 // INTEGRATION

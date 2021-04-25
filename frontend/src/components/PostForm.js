@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../App.css'
 import axios from 'axios'
 
-const PostForm = ({ username, first_name, last_name }) => {
+const PostForm = ({ username, first_name, last_name, profile }) => {
   // sets state for the post information
   const [data, setData] = useState('')
   const [button, setButton] = useState(true)
@@ -17,7 +17,7 @@ const PostForm = ({ username, first_name, last_name }) => {
   const submitPost = async () => {
     const content = data
     const info = await axios.post('/feed/posts/add', {
-      username, first_name, last_name, content,
+      username, first_name, last_name, content, profile,
     })
     if (typeof info.data === 'string' && info.data.startsWith('ERROR:')) {
       alert('ERROR while filling in response. Please try again')

@@ -31,10 +31,10 @@ router.get('/allusers', isAuthenticated, (req, res, next) => {
 
 router.post('/signup', (req, res, next) => {
   const {
-    username, password, first_name, last_name, description,
+    username, password, first_name, last_name, description, friends, profile,
   } = req.body
   User.create({
-    username, password, first_name, last_name, description,
+    username, password, first_name, last_name, description, friends, profile,
   }, (err, data) => {
     if (err) {
       next(new Error('Failed to signup'))
@@ -56,7 +56,7 @@ router.post('/login', (req, res, next) => {
       req.session.password = password
       res.send('logged in')
     } else {
-      console.log('handle failure to login')
+      next(new Error('Failed to login'))
     }
   })
 })

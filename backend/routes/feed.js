@@ -17,10 +17,10 @@ router.get('/posts', isAuthenticated, (req, res, next) => {
 
 router.post('/posts/add', isAuthenticated, (req, res, next) => {
   const {
-    username, first_name, last_name, content,
+    username, first_name, last_name, content, profile,
   } = req.body
   Posts.create({
-    username, first_name, last_name, content,
+    username, first_name, last_name, content, profile,
   }, (err, data) => {
     if (err) {
       console.log(err)
@@ -44,10 +44,11 @@ router.get('/comments/:postid', isAuthenticated, (req, res, next) => {
 
 router.post('/comments/add', isAuthenticated, (req, res, next) => {
   const {
-    postid, username, first_name, last_name, content,
+    postid, username, first_name, last_name, content, profile,
   } = req.body
+  console.log(req.body)
   Comments.create({
-    postid, username, first_name, last_name, content,
+    postid, username, first_name, last_name, content, profile,
   }, (err, data) => {
     if (err) {
       console.log(err)

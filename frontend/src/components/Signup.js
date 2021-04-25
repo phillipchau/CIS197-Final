@@ -12,13 +12,15 @@ const Signup = () => {
 
   const history = useHistory()
   const signup = async () => {
+    const friends = []
+    const profile = 'https://sumaleeboxinggym.com/wp-content/uploads/2018/06/Generic-Profile-1600x1600.png'
     const data = await axios.post('/account/signup', {
-      username, password, first_name, last_name, description
+      username, password, first_name, last_name, description, friends, profile,
     })
     if (typeof data.data === 'string' && data.data.startsWith('ERROR:')) {
       alert('An error occured while signing up')
     } else {
-      history.push(`/${username}`)
+      history.push(`/home/${username}`)
     }
   }
   return (
