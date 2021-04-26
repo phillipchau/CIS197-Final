@@ -17,10 +17,10 @@ router.get('/posts', isAuthenticated, (req, res, next) => {
 
 router.post('/posts/add', isAuthenticated, (req, res, next) => {
   const {
-    username, first_name, last_name, content, profile,
+    username, first_name, last_name, content, profile, date, likes,
   } = req.body
   Posts.create({
-    username, first_name, last_name, content, profile,
+    username, first_name, last_name, content, profile, date, likes,
   }, (err, data) => {
     if (err) {
       console.log(err)
@@ -29,6 +29,46 @@ router.post('/posts/add', isAuthenticated, (req, res, next) => {
       res.send('posts added successfully')
     }
   })
+})
+
+router.post('/posts/addlike', isAuthenticated, (req, res, next) => {
+  const {
+    _id, person,
+  } = req.body
+  Posts.updateOne({ _id },
+    {
+      $addToSet: {
+        likes: person,
+      },
+    },
+    (err, result) => {
+      if (err) {
+        console.log(err)
+        next(new Error('Data not found'))
+      } else {
+        res.send(result)
+      }
+    })
+})
+
+router.post('/posts/deletelike', isAuthenticated, (req, res, next) => {
+  const {
+    _id, person,
+  } = req.body
+  Posts.updateOne({ _id },
+    {
+      $pull: {
+        likes: person,
+      },
+    },
+    (err, result) => {
+      if (err) {
+        console.log(err)
+        next(new Error('Data not found'))
+      } else {
+        res.send(result)
+      }
+    })
 })
 
 router.get('/comments/:postid', isAuthenticated, (req, res, next) => {

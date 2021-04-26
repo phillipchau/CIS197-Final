@@ -16,8 +16,10 @@ const PostForm = ({ username, first_name, last_name, profile }) => {
 
   const submitPost = async () => {
     const content = data
+    const date = new Date().toLocaleString().toString()
+    const likes = []
     const info = await axios.post('/feed/posts/add', {
-      username, first_name, last_name, content, profile,
+      username, first_name, last_name, content, profile, date, likes,
     })
     if (typeof info.data === 'string' && info.data.startsWith('ERROR:')) {
       alert('ERROR while filling in response. Please try again')

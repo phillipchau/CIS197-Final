@@ -7,7 +7,15 @@ require('react-bootstrap/ModalHeader')
 
 const SkillsModal = props => {
   const [skill, setSkill] = useState('')
+  const [button, setButton] = useState(true)
   const { showState, hide, type, update } = props
+
+  if ((skill === '') && !button) {
+    setButton(true)
+  }
+  if ((skill !== '') && button) {
+    setButton(false)
+  }
 
   const submitResponse = async () => {
     const data = await axios.post('/api/skills/add', {
@@ -47,7 +55,7 @@ const SkillsModal = props => {
                 </label>
                 <input className="form-control" type="text" id="name" name="name" value={skill} onChange={e => setSkill(e.target.value)} placeholder="Skill" required />
               </div>
-              <button style={{ marginBottom: 5 }} onClick={submitResponse} type="submit" className="btn btn-primary btn-lg btn-block">Submit</button>
+              <button style={{ marginBottom: 5 }} onClick={submitResponse} type="submit" className="btn btn-primary btn-lg btn-block" disabled={button}>Submit</button>
             </form>
           </div>
         </Modal.Body>

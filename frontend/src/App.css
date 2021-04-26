@@ -221,14 +221,18 @@ body {padding-bottom: 20px;}
 }
 
 .posttext{
-  font-size:20px;
-  text-align:center;
+  font-size:25px;
   margin-bottom:30px;
+  margin-left:40px;
 }
 
 .commentgroup{
   margin-top:10px;
   border-top: 1px solid gray;
+}
+
+.likeButton {
+  margin-right:10px;
 }
 
 #skills {

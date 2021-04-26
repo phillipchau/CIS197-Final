@@ -31,7 +31,6 @@ const Feed = () => {
     if (typeof data.data === 'string' && data.data.startsWith('ERROR:')) {
       alert('ERROR with getting data')
     } else {
-      console.log(data.data)
       setUsers(data.data)
     }
   }
@@ -53,6 +52,7 @@ const Feed = () => {
     if (typeof data.data === 'string' && data.data.startsWith('ERROR: ')) {
       alert('ERROR with getting education data')
     } else {
+      console.log(data.data)
       setPost(data.data)
     }
   }
@@ -144,7 +144,9 @@ const Feed = () => {
             firstname={info.first_name}
             lastname={info.last_name}
             contentInfo={info.content}
+            date={info.date}
             login={login}
+            likes={info.likes}
           />
         ))}
       </div>

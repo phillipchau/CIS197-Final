@@ -284,7 +284,7 @@ const Home = () => {
           </h2>
           <hr style={{ border: '1px solid gray' }} />
           <div className="skills">
-            <h4>
+            <h4 style={{ color: 'gray' }}>
               Industry Knowledge
               {login === id && (
               <button
@@ -309,7 +309,7 @@ const Home = () => {
             ))}
           </div>
           <div className="skills">
-            <h4>
+            <h4 style={{ color: 'gray' }}>
               Tools and Technologies
               {login === id && (
               <button
