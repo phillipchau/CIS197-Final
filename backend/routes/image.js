@@ -10,7 +10,7 @@ const storage = multer.memoryStorage({
   }
 })
 
-const upload = multer({storage: storage}).single('file')
+const upload = multer({ storage: storage }).single('file')
 
 const router = express.Router()
 

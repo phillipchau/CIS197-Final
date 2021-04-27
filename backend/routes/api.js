@@ -131,6 +131,34 @@ router.post('/experience/edit', isAuthenticated, (req, res, next) => {
   })
 })
 
+router.post('/experience/delete', isAuthenticated, (req, res, next) => {
+  const {
+    _id,
+  } = req.body
+  Experience.findOneAndDelete({ _id }, (err, data) => {
+    if (err) {
+      console.log(err)
+      next(new Error('Could not update experience'))
+    } else {
+      res.send('experience is deleted')
+    }
+  })
+})
+
+router.post('/education/delete', isAuthenticated, (req, res, next) => {
+  const {
+    _id,
+  } = req.body
+  Education.findOneAndDelete({ _id }, (err, data) => {
+    if (err) {
+      console.log(err)
+      next(new Error('Could not update experience'))
+    } else {
+      res.send('experience is deleted')
+    }
+  })
+})
+
 router.post('/education/edit', isAuthenticated, (req, res, next) => {
   const {
     _id, name, startdate, enddate, location, description, media,

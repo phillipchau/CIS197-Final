@@ -1,3 +1,4 @@
+// middleware to check if user is logged in
 const checkSession = (req, res, next) => {
   if (req.session.username !== '') {
     next()
