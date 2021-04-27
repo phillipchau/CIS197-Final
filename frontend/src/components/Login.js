@@ -13,7 +13,6 @@ const Login = () => {
     if (typeof logdata.data === 'string' && logdata.data.startsWith('ERROR:')) {
       alert('ERROR with getting login data')
     } else if (logdata.data.user) {
-      console.log(logdata.data.user)
       // if the user is logged in we redirect them to their page
       history.push(`/home/${logdata.data.user}`)
     }
@@ -67,9 +66,6 @@ const Login = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        <p className="text-secondary bot-margin">Created by G08</p>
       </div>
     </>
   )

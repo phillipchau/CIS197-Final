@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import '../App.css'
 
 const CommentWrapper = ({ commentid, first_name, last_name, content, prof }) => {
-  const [comment, setComment] = useState('')
-  const [commentOn, setCommentOn] = useState(false)
 
   return (
     <>

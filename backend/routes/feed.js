@@ -86,7 +86,6 @@ router.post('/comments/add', isAuthenticated, (req, res, next) => {
   const {
     postid, username, first_name, last_name, content, profile,
   } = req.body
-  console.log(req.body)
   Comments.create({
     postid, username, first_name, last_name, content, profile,
   }, (err, data) => {
